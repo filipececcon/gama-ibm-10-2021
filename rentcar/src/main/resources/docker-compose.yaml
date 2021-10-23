@@ -1,0 +1,25 @@
+version: '3.1'
+
+services:
+
+  #### POSTGRESS
+
+  # banco de dados relacional
+  postgres:
+    image: postgres
+    restart: always
+    container_name: gama_postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: gama
+
+
+  # interface web para administração do postgres
+  admin_postgres:
+    image: adminer
+    container_name: gama_admin_postgres
+    ports:
+      - 9081:8080
+    depends_on:
+      - postgres

@@ -1,10 +1,6 @@
 package br.com.gamastore.rentcar.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
-
-@Data
+@javax.persistence.Entity
 public class Car extends Entity {
 
 	private String color;
@@ -23,6 +19,56 @@ public class Car extends Entity {
 		this.licensePlate = licensePlate;
 		this.price = price;
 	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+
+	public int getYearManufactered() {
+		return yearManufactered;
+	}
+
+	public void setYearManufactered(int yearManufactered) {
+		this.yearManufactered = yearManufactered;
+	}
+
+	public int getYearModel() {
+		return yearModel;
+	}
+
+	public void setYearModel(int yearModel) {
+		this.yearModel = yearModel;
+	}
+
+	public String getLicensePlate() {
+		return licensePlate;
+	}
+
+	public void setLicensePlate(String licensePlate) {
+		this.licensePlate = licensePlate;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	
+	
 	
 	
 }
