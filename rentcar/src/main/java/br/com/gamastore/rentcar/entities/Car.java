@@ -10,6 +10,11 @@ public class Car extends Entity {
 	private String licensePlate;
 	private double price;
 	
+	public Car() {
+		
+	}
+	
+	
 	public Car(String color, String brand, int yearManufactered, int yearModel, String licensePlate, double price) {
 		super();
 		this.color = color;
@@ -67,8 +72,4 @@ public class Car extends Entity {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	
-	
-	
-	
 }
