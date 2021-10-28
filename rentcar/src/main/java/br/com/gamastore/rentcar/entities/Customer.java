@@ -1,7 +1,9 @@
 package br.com.gamastore.rentcar.entities;
 
-@javax.persistence.Entity
-public class Customer extends Entity {
+import javax.persistence.Entity;
+
+@Entity
+public class Customer extends SuperEntity {
 	private String name;
 	private String address;
 	

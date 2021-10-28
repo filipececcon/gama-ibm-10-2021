@@ -1,7 +1,9 @@
 package br.com.gamastore.rentcar.entities;
 
-@javax.persistence.Entity
-public class Car extends Entity {
+import javax.persistence.Entity;
+
+@Entity
+public class Car extends SuperEntity {
 
 	private String color;
 	private String brand;
@@ -13,8 +15,7 @@ public class Car extends Entity {
 	public Car() {
 		
 	}
-	
-	
+		
 	public Car(String color, String brand, int yearManufactered, int yearModel, String licensePlate, double price) {
 		super();
 		this.color = color;

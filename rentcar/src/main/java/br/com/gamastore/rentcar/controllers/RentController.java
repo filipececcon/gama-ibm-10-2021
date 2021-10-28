@@ -8,17 +8,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.gamastore.rentcar.entities.Rent;
-import br.com.gamastore.rentcar.services.RentService;
+import br.com.gamastore.rentcar.repositories.RentRepository;
 
 @RestController
 @RequestMapping("/rents")
 public class RentController {
 
 	@Autowired
-	private RentService service;
+	private RentRepository service;
 
 	@GetMapping
 	public List<Rent> findAll(){
-		return service.getAll();
+		return service.findAll();
 	}
 }

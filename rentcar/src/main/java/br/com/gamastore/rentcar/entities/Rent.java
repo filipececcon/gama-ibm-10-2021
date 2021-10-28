@@ -2,10 +2,11 @@ package br.com.gamastore.rentcar.entities;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
-@javax.persistence.Entity
-public class Rent extends Entity {
+@Entity
+public class Rent extends SuperEntity {
 
 	@ManyToOne
 	private Car car;

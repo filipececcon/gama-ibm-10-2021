@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public abstract class Entity {
+public abstract class SuperEntity {
 
 	@Id
 	private UUID id;
@@ -15,7 +15,7 @@ public abstract class Entity {
 	private LocalDateTime updatedAt;
 	private boolean active;
 	
-	public Entity() {
+	public SuperEntity() {
 		id = UUID.randomUUID();
 		var now = LocalDateTime.now();
 		createdAt = now;
