@@ -6,6 +6,8 @@ import java.util.UUID;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import org.hibernate.annotations.Type;
+
 @MappedSuperclass
 public abstract class SuperEntity {
 
@@ -14,6 +16,16 @@ public abstract class SuperEntity {
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
 	private boolean active;
+	
+//	@Id
+//    @GeneratedValue(generator = "uuid")
+//    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
+//    @Type(type = "uuid-char")
+//    @Column(name = "id", updatable = false, insertable = false, nullable = false, columnDefinition = "VARCHAR(255)")
+//    private UUID id;
+	
+	
+	
 	
 	public SuperEntity() {
 		id = UUID.randomUUID();
