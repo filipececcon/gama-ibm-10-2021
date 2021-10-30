@@ -1,11 +1,14 @@
 package br.com.gamastore.rentcar.services;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import br.com.gamastore.rentcar.dto.CarDto;
@@ -21,8 +24,17 @@ public class CarService {
 	@Autowired
 	private CarRepository repository;
 	
-	public List<CarDto> findAll(){
-		return repository.findAll().stream().map(CarFactory::Create).collect(Collectors.toList());
+	public Page<CarDto> findAll(Pageable pageable){ 
+		
+		int size = pageable.getPageSize();
+	
+		if(pageable.getPageSize() > 10) size = 10;
+		else if(pageable.getPageSize() < 0) size = 0;
+		
+		Pageable _p = PageRequest.of(pageable.getPageNumber(), size,pageable.getSort());
+		
+		return repository.findAll(_p).map(CarFactory::Create);
+		//return repository.findAll().stream().map(CarFactory::Create).collect(Collectors.toList());
 	}
 	
 	public CarDto findById(UUID id) {

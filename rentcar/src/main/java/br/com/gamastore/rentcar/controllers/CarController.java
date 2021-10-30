@@ -1,12 +1,15 @@
 package br.com.gamastore.rentcar.controllers;
 
 import java.net.URI;
-import java.util.List;
 import java.util.UUID;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +19,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -34,8 +36,14 @@ public class CarController {
 	private CarService service;
 	
 	@GetMapping
-	public ResponseEntity<List<CarDto>> findAll(@RequestParam(required=false, value="brandName") String brandName){
-		return  ResponseEntity.ok(service.findAll());
+	@Cacheable(value = "cars")
+	public ResponseEntity<Page<CarDto>> findAll(
+			@RequestParam(required=false, value="brandName") String brandName, 
+			Pageable pageable
+			){
+		
+		
+		return  ResponseEntity.ok(service.findAll(pageable));
 	}
 	
 	@GetMapping(value = "/{id}")
@@ -44,6 +52,7 @@ public class CarController {
 		return result != null ? ResponseEntity.ok(result) : ResponseEntity.notFound().build() ; 
 	}
 	
+	@CacheEvict(value="cars", allEntries = true)
 	@PostMapping
 	public ResponseEntity<CarDto> add(@RequestBody @Valid CarForm form, UriComponentsBuilder uriBuilder) {
 		var dto = service.add(form); 
@@ -51,6 +60,7 @@ public class CarController {
 		return ResponseEntity.created(uri).body(dto);    
 	}
 	
+	@CacheEvict(value="cars", allEntries = true)
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<CarDto> update(@PathVariable UUID id, @RequestBody @Valid CarForm form) {
 		var result = service.update(form, id);
@@ -59,8 +69,9 @@ public class CarController {
 				: ResponseEntity.notFound().build();
 	}
 	
+	@CacheEvict(value="cars", allEntries = true)
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<CarDto> update(@PathVariable UUID id) {
+	public ResponseEntity<CarDto> delete(@PathVariable UUID id) {
 		service.remove(id);
 		return ResponseEntity.ok(null);
 	}
@@ -68,9 +79,40 @@ public class CarController {
 	@GetMapping(value = "/teste")
 	public void error() throws Exception {
 		
-		throw new Exception("MEU ERRO INTERNO");
+		//abri a transaçao
+		
+		//try {
+			
+			//pega a conta origem
+			
+			// pega a conta destino
+			
+			// decrementa R$100 do saldo da conta origem
+			
+			// incrementa R$100 no saldo da conta destino
+		
+			//transacao.commit
+			
+		//}
+		//catch(Exception ex) {
+		
+			// transacao.rollback
+		//} 
+		//finally {
+			
+			//fecha a conexao
+		//}
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 	
+	@CacheEvict(value="cars", allEntries = true)
 	@PatchMapping(value="/{id}/price")
 	public ResponseEntity<CarDto> updatePrice(@PathVariable UUID id, @RequestBody @Valid UpdateCarPriceForm form)
 	{
