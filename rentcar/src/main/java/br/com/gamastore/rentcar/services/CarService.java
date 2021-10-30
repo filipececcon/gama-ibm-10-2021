@@ -12,6 +12,7 @@ import br.com.gamastore.rentcar.dto.CarDto;
 import br.com.gamastore.rentcar.entities.Car;
 import br.com.gamastore.rentcar.factories.CarFactory;
 import br.com.gamastore.rentcar.forms.CarForm;
+import br.com.gamastore.rentcar.forms.UpdateCarPriceForm;
 import br.com.gamastore.rentcar.repositories.CarRepository;
 
 @Service
@@ -37,7 +38,11 @@ public class CarService {
 	
 	public CarDto update(CarForm form, UUID id) {
 	
-		var car = repository.findById(id).get();
+		var result = repository.findById(id);
+		
+		if(!result.isPresent()) return null;
+		
+		var car = result.get();
 		
 		car.setColor(form.color);
 		car.setBrand(form.brand);
@@ -52,9 +57,23 @@ public class CarService {
 		return CarFactory.Create(car);	
 	}
 	
-	
 	public void remove(UUID id) {
 		repository.deleteById(id);
 	}
 	
+	public CarDto updatePrice(UpdateCarPriceForm form, UUID id) {
+		
+		var result = repository.findById(id);
+		
+		if(!result.isPresent()) return null;
+		
+		var car = result.get();
+	
+		car.setPrice(form.price);
+		car.setUpdatedAt(LocalDateTime.now());
+		
+		repository.save(car);
+		
+		return CarFactory.Create(car);
+	}
 }
