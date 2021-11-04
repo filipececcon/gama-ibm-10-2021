@@ -20,9 +20,13 @@ import br.com.gamastore.rentcar.repositories.CarRepository;
 
 @Service
 public class CarService {
-
-	@Autowired
+	
 	private CarRepository repository;
+	
+	@Autowired
+	public CarService(CarRepository repository) {
+		this.repository = repository;
+	}
 	
 	public Page<CarDto> findAll(Pageable pageable){ 
 		
@@ -44,7 +48,13 @@ public class CarService {
 	
 	public CarDto add(CarForm form) {
 		Car car = CarFactory.Create(form);
+		
+		var result = repository.findByLicensePlate(form.licensePlate);
+		
+		if(result != null) throw new RuntimeException("O carro já existe na base");
+			
 		repository.save(car);
+		
 		return CarFactory.Create(car);
 	}
 	

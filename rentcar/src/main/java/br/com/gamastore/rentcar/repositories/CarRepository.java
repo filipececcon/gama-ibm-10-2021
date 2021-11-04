@@ -13,6 +13,8 @@ public interface CarRepository extends JpaRepository<Car, UUID> {
 	
 	List<Car> findAllByBrand(String brand);
 	
+	Car findByLicensePlate(String licensePlate);
+	
 	//forma antiga utilizando o DAO => data access object
 //	private CarDao dao;
 //	
