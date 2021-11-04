@@ -1,4 +1,4 @@
-package br.com.gamastore.rentcar.config;
+package br.com.gamastore.rentcar.config.validations;
 
 import java.util.List;
 import java.util.stream.Collectors;
