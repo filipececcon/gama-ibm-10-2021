@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Rent extends SuperEntity {
+public class Rent extends AbstractEntity {
 
 	@ManyToOne
 	private Car car;

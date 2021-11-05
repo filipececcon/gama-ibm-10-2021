@@ -3,7 +3,7 @@ package br.com.gamastore.rentcar.entities;
 import javax.persistence.Entity;
 
 @Entity
-public class Customer extends SuperEntity {
+public class Customer extends AbstractEntity {
 	private String name;
 	private String address;
 	

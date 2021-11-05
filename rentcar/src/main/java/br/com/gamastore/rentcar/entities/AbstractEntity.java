@@ -9,7 +9,7 @@ import javax.persistence.MappedSuperclass;
 import org.hibernate.annotations.Type;
 
 @MappedSuperclass
-public abstract class SuperEntity {
+public abstract class AbstractEntity {
 
 	@Id
 	private UUID id;
@@ -27,7 +27,7 @@ public abstract class SuperEntity {
 	
 	
 	
-	public SuperEntity() {
+	public AbstractEntity() {
 		id = UUID.randomUUID();
 		var now = LocalDateTime.now();
 		createdAt = now;

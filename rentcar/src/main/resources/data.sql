@@ -38,3 +38,35 @@
  (RANDOM_UUID(), 1, CURRENT_DATE(), CURRENT_DATE(), 'PORCHE', '#F3F3F3', 'AAA000', 100, 2013, 2014),
  (RANDOM_UUID(), 1, CURRENT_DATE(), CURRENT_DATE(), 'MASSERATI', '#F3F3F3', 'AAA000', 100, 2013, 2014)
  ; 
+ 
+ INSERT INTO TB_USER
+ (ID,ACTIVE, CREATED_AT, UPDATED_AT, EMAIL, PASSWORD) 
+ VALUES
+ (RANDOM_UUID(), 1, CURRENT_DATE(), CURRENT_DATE(), 'admin@rentcar.com.br', '$2a$10$DA.tDB4zSH/uZ5RL8NV7VezI70NCbO/dYrp9EfQ67VObswKzKPw32')
+ 
+ 
+ 
+ 
+ 
+ 
+ /*
+ SUGESTAO PARA PADROES DE NOMENCLATURA PARA BASE DE DADOS RELACIONAL
+ 
+ TB_ tabelas
+ NR_ numeros
+ VL_ valores(din din)
+ DS_ descriçoes
+ NM_ nomes
+ ST_ status/bit
+ DT_ datas
+ ID indentificação
+ ID_ para FK
+ IX_ indices
+  
+  
+geralmente tudo maiusculo
+ */
+ 
+ 
+ 
+ 
