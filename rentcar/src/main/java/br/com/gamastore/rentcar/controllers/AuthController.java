@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,13 +30,22 @@ public class AuthController {
 	@PostMapping
 	public ResponseEntity<TokenDto> login(@RequestBody @Valid LoginForm form) {
 		
-		UsernamePasswordAuthenticationToken dadosLogin = new UsernamePasswordAuthenticationToken(form.email, form.password); 
-				
-		Authentication autenticacao = authManager.authenticate(dadosLogin);
+		try {
+			
+			UsernamePasswordAuthenticationToken dadosLogin = new UsernamePasswordAuthenticationToken(form.email, form.password); 
+			
+			Authentication autenticacao = authManager.authenticate(dadosLogin);
+			
+			var token = tokenService.gerarToken(autenticacao);
+			
+			return ResponseEntity.ok(new TokenDto(token, "Bearer"));
+			
+		} 
+		catch(AuthenticationException ex) {
+					
+			return ResponseEntity.badRequest().build();
+		}
 		
-		var token = tokenService.gerarToken(autenticacao);
-		
-		return ResponseEntity.ok(new TokenDto(token, "Bearer"));
 		
 		
 //		UsernamePasswordAuthenticationToken dadosLogin = form.converter();
