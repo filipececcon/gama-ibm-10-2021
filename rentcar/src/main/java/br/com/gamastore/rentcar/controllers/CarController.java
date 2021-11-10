@@ -37,12 +37,7 @@ public class CarController {
 	
 	@GetMapping
 	@Cacheable(value = "cars")
-	public ResponseEntity<Page<CarDto>> findAll(
-			@RequestParam(required=false, value="brandName") String brandName, 
-			Pageable pageable
-			){
-		
-		
+	public ResponseEntity<Page<CarDto>> findAll(@RequestParam(required=false, value="brandName") String brandName, Pageable pageable){
 		return  ResponseEntity.ok(service.findAll(pageable));
 	}
 	
@@ -117,12 +112,9 @@ public class CarController {
 	public ResponseEntity<CarDto> updatePrice(@PathVariable UUID id, @RequestBody @Valid UpdateCarPriceForm form)
 	{
 		var dto = service.updatePrice(form, id);
-		
-		return dto != null 
+
+		return dto != null
 				? ResponseEntity.ok(dto)
 				: ResponseEntity.notFound().build();
 	}
-	
-	
-	
 }
